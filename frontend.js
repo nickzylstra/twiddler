@@ -10,14 +10,10 @@ $(document).ready(() => {
   }
 
   // function to show undisplayed tweets
-  function showTweets(startIndex, finishIndex, userRef = 'home') {
+  function showTweets(startIndex, finishIndex, userRef) {
     let index = startIndex;
-    if (userRef !== 'home') {
-      userRef = `users.${userRef}`;
-    }
 
     while (index >= finishIndex) {
-      /* const tweet = streams.home[index]; */
       const tweet = resolve(`${userRef}.${index}`, streams);
       const $tweet = $('<div class="tweet"></div>');
 
@@ -35,20 +31,31 @@ $(document).ready(() => {
     }
   }
 
-  // function to start process that shows new tweets
-  function startShowNewTweetsProcess(userRef = 'home') {
+  // load tweet stream on page
+  function loadStream(user = 'home') {
+    $('.container').empty();
+
+    let userRef = user;
+    if (userRef !== 'home') {
+      userRef = `users.${userRef}`;
+    }
+
+    // show existing undisplayed tweets
+    const initIndex = resolve(`${userRef}.length`, streams) - 1;
+    showTweets(initIndex, 0, userRef);
+
+    // start process to show new undisplayed tweets
     const refreshTweetRate = 3000;
     let finishIndex = initIndex + 1;
-
     return setInterval(() => {
-      const startIndex = streams.home.length - 1;
+      const startIndex = resolve(`${userRef}.length`, streams) - 1;
       showTweets(startIndex, finishIndex, userRef);
       finishIndex = startIndex + 1;
     }, refreshTweetRate);
   }
 
-  // load home tweet stream
-  const initIndex = streams.home.length - 1;
-  showTweets(initIndex, 0);
-  startShowNewTweetsProcess();
+  // load home user tweet stream
+  loadStream();
+
+  // show user's tweets when clicked on
 });
