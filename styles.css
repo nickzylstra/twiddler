@@ -1,0 +1,25 @@
+.tweet {
+  display: grid;
+  border: 2px blue solid;
+  background-color: beige;
+  height: 200px;
+  width: 100%;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 4fr;
+  gap: 10px;
+}
+
+.user {
+  grid-row: 1 / 2;
+  grid-column: 1 / 2;
+}
+
+.timestamp {
+  grid-row: 1 / 2;
+  grid-column: 2 / 3;
+}
+
+.message {
+  grid-row: 2 / 6;
+  grid-column: 2 / 3;
+}
