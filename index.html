@@ -19,10 +19,25 @@
     <nav class='nav'> <!--add nav bar in future with title for home or user-->
       <button class="btn btn-link" id="showAllBtn" onclick="loadStream()">Show All</button>
     </nav>
-    <br>
-    <br>
-    <main class="container">
 
+    <main >
+      <!--Form to add a tweet-->
+      <form class="form" id="tweetForm" onsubmit="return false;" method="POST">
+        <label>Post a message</label>
+        <div class="form-group">
+            <input autofocus class="form-control" id="username" name="username" placeholder="username" type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" id="message" autocomplete="off" name="message" placeholder="message" type="text">
+        </div>
+        <button class="btn btn-primary" onclick="postTweet()">Post</button>
+      </form>
+
+      <br>
+      <br>
+
+      <!--Tweet stream display-->
+      <div class="container" id='tweetStream'></div>
     </main>
     <script src="frontend.js"></script>
   </body>

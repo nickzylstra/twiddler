@@ -3,6 +3,12 @@
   grid-template-columns: 50px minmax(50px, auto);
 }
 
+.form {
+  border: 2px solid rgba(211, 211, 211, 0.301);
+  align-self: center;
+  padding: 20px;
+}
+
 .container {
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
@@ -17,12 +23,14 @@
   grid-column: 2;
   grid-row-start: 2 initial;
   box-shadow: 5px 5px rgba(211, 211, 211, 0.301);
-  border: 2px solid rgba(211, 211, 211, 0.301)
+  border: 2px solid rgba(211, 211, 211, 0.301);
+  padding: 5px;
 }
 
 .user {
   grid-row: 1;
   grid-column: 8 / 11;
+  /* fix alignment to not overflow right*/
 }
 
 .timestamp {
