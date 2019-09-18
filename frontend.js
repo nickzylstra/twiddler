@@ -34,14 +34,18 @@ function showTweets(startIndex, finishIndex, userRef) {
 let tweetStreamProcess;
 function loadStream(user = 'home') {
   tweetStreamProcess = (() => {
+    // clear existing stream
     $main.html('');
+    $('#showAllBtn').hide();
     if (tweetStreamProcess) {
       clearInterval(tweetStreamProcess);
     }
 
+    // determine user and set nav button if not home
     let userRef = user;
     if (userRef !== 'home') {
       userRef = `users.${userRef}`;
+      $('#showAllBtn').show();
     }
 
     // show existing undisplayed tweets
