@@ -19,7 +19,8 @@ function showTweets(startIndex, finishIndex, userRef) {
     const $user = $(`<div class="user btn btn-link" onclick="loadStream('${tweet.user}')"> @${tweet.user}</div>`);
     $user.appendTo($tweet);
 
-    const $timestamp = $(`<div class="timestamp">${tweet.created_at}</div>`);
+    const timediff = moment.duration(new Date() - tweet.created_at).humanize();
+    const $timestamp = $(`<div class="timestamp">${timediff} ago</div>`);
     $timestamp.appendTo($tweet);
 
     const $message = $(`<div class="message"> "${tweet.message}"</div>`);
