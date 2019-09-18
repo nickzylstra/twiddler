@@ -30,35 +30,36 @@ function showTweets(startIndex, finishIndex, userRef) {
   }
 }
 
-let tweetRefreshProcess;
-
 // function to load tweet stream on page
+let tweetStreamProcess;
 function loadStream(user = 'home') {
-  $main.html('');
-  if (tweetRefreshProcess) {
-    clearInterval(tweetRefreshProcess);
-  }
+  tweetStreamProcess = (() => {
+    $main.html('');
+    if (tweetStreamProcess) {
+      clearInterval(tweetStreamProcess);
+    }
 
-  let userRef = user;
-  if (userRef !== 'home') {
-    userRef = `users.${userRef}`;
-  }
+    let userRef = user;
+    if (userRef !== 'home') {
+      userRef = `users.${userRef}`;
+    }
 
-  // show existing undisplayed tweets
-  const initIndex = resolve(`${userRef}.length`, streams) - 1;
-  showTweets(initIndex, 0, userRef);
+    // show existing undisplayed tweets
+    const initIndex = resolve(`${userRef}.length`, streams) - 1;
+    showTweets(initIndex, 0, userRef);
 
-  // start process to show new undisplayed tweets
-  const refreshTweetRate = 3000;
-  let finishIndex = initIndex + 1;
-  return setInterval(() => {
-    const startIndex = resolve(`${userRef}.length`, streams) - 1;
-    showTweets(startIndex, finishIndex, userRef);
-    finishIndex = startIndex + 1;
-  }, refreshTweetRate);
+    // start process to show new undisplayed tweets
+    const refreshTweetRate = 3000;
+    let finishIndex = initIndex + 1;
+    return setInterval(() => {
+      const startIndex = resolve(`${userRef}.length`, streams) - 1;
+      showTweets(startIndex, finishIndex, userRef);
+      finishIndex = startIndex + 1;
+    }, refreshTweetRate);
+  })();
 }
 
 $(document).ready(() => {
   // load home user tweet stream
-  tweetRefreshProcess = loadStream();
+  loadStream();
 });
