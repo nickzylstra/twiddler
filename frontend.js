@@ -11,7 +11,7 @@ function resolve(path, obj, separator = '.') {
 function showTweets(startIndex, finishIndex, userRef) {
   let index = startIndex;
 
-  while (index >= finishIndex) {
+  while (index <= finishIndex) {
     // const tweet = streams[userRef][index];
     const tweet = resolve(`${userRef}.${index}`, streams);
     const $tweet = $('<div class="tweet"></div>');
@@ -26,7 +26,7 @@ function showTweets(startIndex, finishIndex, userRef) {
     $message.appendTo($tweet);
 
     $tweet.prependTo($main);
-    index -= 1;
+    index += 1;
   }
 }
 
@@ -46,15 +46,15 @@ function loadStream(user = 'home') {
 
     // show existing undisplayed tweets
     const initIndex = resolve(`${userRef}.length`, streams) - 1;
-    showTweets(initIndex, 0, userRef);
+    showTweets(0, initIndex, userRef);
 
     // start process to show new undisplayed tweets
     const refreshTweetRate = 3000;
-    let finishIndex = initIndex + 1;
+    let startIndex = initIndex + 1;
     return setInterval(() => {
-      const startIndex = resolve(`${userRef}.length`, streams) - 1;
+      const finishIndex = resolve(`${userRef}.length`, streams) - 1;
       showTweets(startIndex, finishIndex, userRef);
-      finishIndex = startIndex + 1;
+      startIndex = finishIndex + 1;
     }, refreshTweetRate);
   })();
 }
