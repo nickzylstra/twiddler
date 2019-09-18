@@ -16,7 +16,7 @@ function showTweets(startIndex, finishIndex, userRef) {
     const tweet = resolve(`${userRef}.${index}`, streams);
     const $tweet = $('<div class="tweet"></div>');
 
-    const $user = $(`<div class="user" onclick="loadStream('${tweet.user}')"> @${tweet.user}</div>`);
+    const $user = $(`<div class="user btn btn-link" onclick="loadStream('${tweet.user}')"> @${tweet.user}</div>`);
     $user.appendTo($tweet);
 
     const $timestamp = $(`<div class="timestamp">${tweet.created_at}</div>`);

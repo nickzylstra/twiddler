@@ -3,16 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Tweet Stream</title>
 
     <link href="styles.css" rel="stylesheet">
+    <!-- <link href="material.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
-    <title>Tweet Stream</title>
+
   </head>
   <body>
-    <nav>
-      <button id="homeBtn" onclick="loadStream()">Home</button>
-    </nav>
+    <button class="btn btn-link" id="showAllBtn" onclick="loadStream()">Show All</button>
+    <h1>Just in...</h1>
+    <br>
     <main class="container">
 
     </main>
